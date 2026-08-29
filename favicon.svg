@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Be Personal Trainer">
+  <defs>
+    <linearGradient id="bpt-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#23242f"/>
+      <stop offset="1" stop-color="#0e0e15"/>
+    </linearGradient>
+    <linearGradient id="bpt-bar" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff9a5c"/>
+      <stop offset=".5" stop-color="#ff5a1f"/>
+      <stop offset="1" stop-color="#d8430c"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="14" fill="url(#bpt-bg)"/>
+
+  <!-- barbell, tilted so the mark fills the square and reads as a lift -->
+  <g transform="rotate(-35 32 32)" fill="url(#bpt-bar)">
+    <rect x="14" y="28.6" width="36" height="6.8" rx="2.2"/>
+    <rect x="16.5" y="25" width="4.5" height="14" rx="1.6"/>
+    <rect x="43" y="25" width="4.5" height="14" rx="1.6"/>
+    <rect x="8" y="20.5" width="7" height="23" rx="2.4"/>
+    <rect x="49" y="20.5" width="7" height="23" rx="2.4"/>
+  </g>
+</svg>

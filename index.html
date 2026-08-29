@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Be Personal Trainer — Personal Training with Brandon Ross</title>
+    <meta
+      name="description"
+      content="Personal training with Brandon Ross in Melbourne: strength, conditioning and nutrition plans, in the gym or online. 4-week beginner programmes from $39/month."
+    />
+    <meta name="theme-color" content="#101018" />
+    <link rel="canonical" href="https://bepersonaltrainer.example/" />
+
+    <!-- icon -->
+    <link rel="icon" href="icon.png" />
+
+    <!-- social -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Be Personal Trainer — Personal Training with Brandon Ross"
+    />
+    <meta
+      property="og:description"
+      content="Strength, conditioning and nutrition coaching in Melbourne or online."
+    />
+    <meta property="og:image" content="icon-512.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      fetchpriority="high"
+      href="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=70"
+    />
+
+    <!-- fonts loaded without blocking first paint -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Share+Tech+Mono&family=Roboto:wght@400;500&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Share+Tech+Mono&family=Roboto:wght@400;500&display=swap"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Share+Tech+Mono&family=Roboto:wght@400;500&display=swap"
+      />
+    </noscript>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="nav" id="nav">
+      <a class="logo" href="#start" aria-label="Be Personal Trainer home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 20" width="40" height="20">
+            <path fill="#ff5a1f" d="M4 4h5v12H4zM31 4h5v12h-5zM9 8h22v4H9z" />
+          </svg>
+        </span>
+        <span class="logo-text"
+          ><em>be</em> personal<small>trainer</small></span
+        >
+      </a>
+
+      <button
+        class="burger"
+        id="burger"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="menu" id="menu">
+        <a href="#start">Start</a>
+        <a href="#training">Training</a>
+        <a href="#about">About me</a>
+        <a href="#services">My services</a>
+        <a href="#etraining">E-training</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="start" class="hero">
+      <div class="hero-media">
+        <img
+          src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1400&q=70"
+          alt="Trainer resting on a gym bench"
+          width="1400"
+          height="933"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>Personal training with<br /><span>Brandon Ross</span></h1>
+          <p>Build strength, stamina and habits that actually last.</p>
+          <a class="btn btn-primary read-more" href="#about">Read more</a>
+        </div>
+      </div>
+
+      <div class="hero-cards">
+        <article class="card">
+          <div class="card-head">
+            <h3>Varied training</h3>
+            <span class="pill">+25%</span>
+          </div>
+          <svg
+            class="wave"
+            viewBox="0 0 300 90"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <line x1="0" y1="30" x2="300" y2="30" />
+            <line x1="0" y1="60" x2="300" y2="60" />
+            <path
+              class="w1"
+              d="M0 62 C40 62 55 20 95 22 C135 24 145 55 185 40 C225 25 260 48 300 44"
+            />
+            <path
+              class="w2"
+              d="M0 52 C40 52 60 74 100 74 C140 74 150 40 190 52 C230 64 265 60 300 60"
+            />
+          </svg>
+          <div class="legend">
+            <span class="dot orange"></span>Progress<span
+              class="dot purple"
+            ></span
+            >Old habits
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><h3>Training intensity</h3></div>
+          <div class="ring" data-value="92">
+            <svg viewBox="0 0 120 120" aria-hidden="true">
+              <circle class="ring-bg" cx="60" cy="60" r="52" />
+              <circle class="ring-fg" cx="60" cy="60" r="52" />
+            </svg>
+            <b>92<small>%</small></b>
+          </div>
+          <div class="card-foot">
+            <span>Progress</span><span class="pill">+20%</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- TRAINING -->
+    <section id="training" class="sec sec-dark">
+      <div class="wrap">
+        <h2 class="display">4-week beginner's workout program</h2>
+
+        <ol class="timeline">
+          <li class="on">
+            <span class="day">Mon</span><span class="node"></span
+            ><span class="what">Crossfit</span>
+          </li>
+          <li>
+            <span class="day">Tue</span><span class="node"></span
+            ><span class="what"></span>
+          </li>
+          <li class="on">
+            <span class="day">Wed</span><span class="node"></span
+            ><span class="what">Running</span>
+          </li>
+          <li>
+            <span class="day">Thu</span><span class="node"></span
+            ><span class="what"></span>
+          </li>
+          <li class="on">
+            <span class="day">Fri</span><span class="node"></span
+            ><span class="what">Crossfit + running</span>
+          </li>
+        </ol>
+
+        <p class="lead muted">
+          A progressive four-week block that alternates conditioning and
+          recovery, so you add volume without burning out. Every session is
+          scaled to the numbers you hit the week before.
+        </p>
+      </div>
+
+      <div class="split">
+        <div class="split-copy">
+          <h2 class="display">Change your<br />body shape</h2>
+          <p class="muted">
+            Strength work, mobility and a nutrition plan you can keep to on a
+            normal week. Sessions run 45–60 minutes, in the gym or online.
+          </p>
+          <ul class="ticks">
+            <li>Personal plan reviewed every 2 weeks</li>
+            <li>Form checks on every lift</li>
+            <li>Nutrition targets, not fad diets</li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <img
+            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=1200&q=70"
+            alt="Athlete during a group class"
+            width="1200"
+            height="800"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="sec sec-light">
+      <div class="wrap about">
+        <div class="about-copy">
+          <p class="eyebrow">About me</p>
+          <h2 class="display dark">Experienced<br />personal<br />trainer</h2>
+          <p>
+            Twelve years coaching everyone from first-timers to national-level
+            athletes. My job is to make the plan simple enough that you keep
+            showing up.
+          </p>
+          <p>Certified strength &amp; conditioning coach, nutrition L3.</p>
+          <a class="btn btn-primary" href="#contact">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              aria-hidden="true"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" />
+            </svg>
+            My Instagram
+          </a>
+        </div>
+
+        <div class="about-media">
+          <img
+            class="am-main"
+            src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=900&q=70"
+            alt="Brandon Ross"
+            width="900"
+            height="1200"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="am-t1"
+            src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?auto=format&fit=crop&w=400&q=70"
+            alt=""
+            width="400"
+            height="400"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            class="am-t2"
+            src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=400&q=70"
+            alt=""
+            width="400"
+            height="400"
+            loading="lazy"
+            decoding="async"
+          />
+          <div class="am-chip dark">
+            <span>Intensity</span>
+            <div class="ring sm" data-value="92">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-bg" cx="60" cy="60" r="52" />
+                <circle class="ring-fg" cx="60" cy="60" r="52" />
+              </svg>
+              <b>92<small>%</small></b>
+            </div>
+          </div>
+          <a class="am-chip light" href="#contact">Join me</a>
+        </div>
+      </div>
+
+      <div class="wrap icons">
+        <div>
+          <svg viewBox="0 0 48 48">
+            <circle cx="10" cy="24" r="5" />
+            <circle cx="38" cy="14" r="5" />
+            <circle cx="38" cy="34" r="5" />
+            <path d="M15 22l18-6M15 26l18 6" />
+          </svg>
+          <p>Strength programming</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48">
+            <path d="M4 32h30l10-5-8-6-8 3-6-6-6 3z" />
+            <path d="M4 36h40" />
+          </svg>
+          <p>Running &amp; conditioning</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48">
+            <path d="M16 16h16l-2 26H18z" />
+            <path d="M24 16c0-6 4-9 9-9-1 6-4 9-9 9z" />
+          </svg>
+          <p>Nutrition coaching</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48">
+            <circle cx="14" cy="36" r="7" />
+            <circle cx="36" cy="36" r="5" />
+            <path d="M14 36l8-16h10M22 20l-4-8" />
+          </svg>
+          <p>Cardio plans</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 48 48">
+            <path d="M14 10v28M34 10v28M10 18h8M30 18h8M10 30h8M30 30h8" />
+          </svg>
+          <p>Home workouts</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="sec sec-dark pricing">
+      <div class="wrap">
+        <p class="eyebrow center">Pricing</p>
+        <h2 class="display center">My services</h2>
+
+        <div class="plans">
+          <article class="plan">
+            <h3>Basic</h3>
+            <p>Self-guided plan with monthly check-ins.</p>
+            <ul>
+              <li class="yes">Monthly training plan</li>
+              <li class="no">Weekly video review</li>
+              <li class="no">1:1 sessions</li>
+            </ul>
+            <div class="price">$39</div>
+            <a class="plan-cta" href="#contact">Buy now</a>
+          </article>
+          <article class="plan is-orange">
+            <h3>Professional</h3>
+            <p>Coaching with weekly feedback loops.</p>
+            <ul>
+              <li class="yes">Weekly training plan</li>
+              <li class="yes">Weekly video review</li>
+              <li class="no">1:1 sessions</li>
+            </ul>
+            <div class="price">$59</div>
+            <a class="plan-cta" href="#contact">Buy now</a>
+          </article>
+          <article class="plan is-purple">
+            <h3>Advanced</h3>
+            <p>Full programme with in-person work.</p>
+            <ul>
+              <li class="yes">Weekly training plan</li>
+              <li class="yes">Weekly video review</li>
+              <li class="yes">4 × 1:1 sessions</li>
+            </ul>
+            <div class="price">$89</div>
+            <a class="plan-cta" href="#contact">Buy now</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- E-TRAINING -->
+    <section id="etraining" class="sec sec-light">
+      <div class="wrap etraining">
+        <div>
+          <p class="eyebrow">Online training courses</p>
+          <h2 class="display dark">E-training &amp;<br />fitness coach</h2>
+          <p>
+            Full-length sessions you can follow at home, plus a library of
+            technique breakdowns for every lift in the programme.
+          </p>
+          <a class="btn btn-primary" href="#contact">
+            <svg
+              width="22"
+              height="16"
+              viewBox="0 0 24 17"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M23 3a3 3 0 0 0-2.1-2.1C19 .4 12 .4 12 .4s-7 0-8.9.5A3 3 0 0 0 1 3C.5 4.9.5 8.5.5 8.5s0 3.6.5 5.5a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5A3 3 0 0 0 23 14c.5-1.9.5-5.5.5-5.5S23.5 4.9 23 3zM9.7 12V5l6 3.5-6 3.5z"
+              />
+            </svg>
+            My YT channel
+          </a>
+        </div>
+        <button class="video" id="videoBtn" aria-label="Play showreel">
+          <img
+            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1100&q=70"
+            alt=""
+            width="1100"
+            height="733"
+            loading="lazy"
+            decoding="async"
+          />
+          <span class="play" aria-hidden="true"
+            ><svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M8 5l12 7-12 7z" /></svg
+          ></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="sec sec-grey">
+      <div class="wrap contact">
+        <div class="logo logo-stacked">
+          <span class="logo-mark" aria-hidden="true"
+            ><svg viewBox="0 0 40 20" width="52" height="26">
+              <path
+                fill="#ff5a1f"
+                d="M4 4h5v12H4zM31 4h5v12h-5zM9 8h22v4H9z"
+              /></svg
+          ></span>
+          <span class="logo-text dark"
+            ><em>be</em> personal<small>trainer</small></span
+          >
+        </div>
+
+        <div class="contact-cols">
+          <address>
+            Level 13, 2 Elizabeth St,<br />Melbourne, Victoria 3000,<br />Australia
+          </address>
+          <div class="right">
+            <a href="tel:+61383766284">+61 (0) 3 8376 6284</a><br />
+            <a href="mailto:hello@bepersonal.example"
+              >hello@bepersonal.example</a
+            >
+          </div>
+        </div>
+
+        <h2 class="display dark center small">Send me a message</h2>
+        <form class="form" id="contactForm" novalidate>
+          <div class="row">
+            <label class="field" for="cf-name">
+              <span class="sr-only">Your name</span>
+              <input
+                id="cf-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                placeholder="Your name"
+                required
+              /><span class="err" id="cf-name-err" aria-live="polite"></span>
+            </label>
+            <label class="field" for="cf-email">
+              <span class="sr-only">Your e-mail</span>
+              <input
+                id="cf-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                placeholder="Your e-mail"
+                required
+              /><span class="err" id="cf-email-err" aria-live="polite"></span>
+            </label>
+          </div>
+          <label class="field" for="cf-subject">
+            <span class="sr-only">Subject</span>
+            <input
+              id="cf-subject"
+              name="subject"
+              type="text"
+              placeholder="Subject"
+            /><span class="err" aria-live="polite"></span>
+          </label>
+          <label class="field" for="cf-message">
+            <span class="sr-only">Message</span>
+            <textarea
+              id="cf-message"
+              name="message"
+              rows="5"
+              placeholder="Message"
+              required
+            ></textarea
+            ><span class="err" aria-live="polite"></span>
+          </label>
+          <button class="btn btn-primary center-btn" type="submit">
+            Send a message
+          </button>
+          <p class="form-status" id="formStatus" role="status"></p>
+        </form>
+      </div>
+      <p class="copyright">
+        © <span id="year"></span> Build By
+        <a
+          href="https://github.com/shena9y"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Mohammed Hamdy</a
+        >
+      </p>
+    </section>
+
+    <div
+      class="modal"
+      id="modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Showreel video"
+      hidden
+    >
+      <button class="modal-close" id="modalClose" aria-label="Close video">
+        &times;
+      </button>
+      <div class="modal-box" id="modalBox"></div>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
