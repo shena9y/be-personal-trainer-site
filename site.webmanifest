@@ -1,7 +1,7 @@
 {
   "name": "Be Personal Trainer",
   "short_name": "BePT",
-  "description": "Personal training with John Doe — strength, conditioning and nutrition coaching.",
+  "description": "Personal training with Brandon Ross — strength, conditioning and nutrition coaching.",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#101018",

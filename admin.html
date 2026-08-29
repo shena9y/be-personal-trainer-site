@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Message inbox — Be Personal Trainer</title>
+    <style>
+      :root {
+        --dark: #101018;
+        --ink: #1c1c26;
+        --orange-deep: #c2410c;
+        --orange: #ff5a1f;
+        --muted: #9aa0aa;
+        --line: rgba(255, 255, 255, 0.08);
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--dark);
+        color: #fff;
+        font: 15px/1.6 Roboto, system-ui, sans-serif;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        background: rgba(16, 16, 24, 0.96);
+        border-bottom: 1px solid var(--line);
+        padding: 18px 24px;
+      }
+      h1 {
+        font-family: Oswald, Impact, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin: 0 0 14px;
+        font-size: 22px;
+      }
+      .key-row, .toolbar { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+      input, select, button { font: inherit; padding: 9px 12px; border-radius: 6px; }
+      input, select {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        background: var(--ink);
+        color: #fff;
+      }
+      button { cursor: pointer; background: var(--orange-deep); border: 1px solid var(--orange-deep); color: #fff; }
+      button:hover { filter: brightness(1.1); }
+      #key { flex: 1 1 320px; max-width: 520px; }
+      .toolbar { margin-top: 12px; }
+      #total { color: var(--muted); font-family: "Share Tech Mono", monospace; font-size: 13px; }
+      main { max-width: 860px; margin: 24px auto; padding: 0 20px; display: grid; gap: 14px; }
+      .card { background: var(--ink); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+      .card h2 { font-size: 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+      .badge {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 3px 9px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .badge.plan { color: #fff; background: var(--orange-deep); border-color: var(--orange-deep); }
+      .badge.unread { color: var(--orange); border-color: var(--orange); }
+      .badge.read { color: #6ee7b7; border-color: #6ee7b7; }
+      .badge.archived { color: var(--muted); }
+      .meta { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+      .body-text {
+        white-space: pre-wrap;
+        margin: 12px 0 0;
+        padding: 12px 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 8px;
+      }
+      .actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+      .actions button { background: transparent; border-color: rgba(255, 255, 255, 0.3); padding: 6px 12px; font-size: 13px; }
+      .actions button.warn:hover { border-color: #f87171; color: #f87171; }
+      #msg { text-align: center; color: var(--muted); padding: 14px; min-height: 1.5em; margin: 0; }
+      .empty { color: var(--muted); text-align: center; padding: 40px 0; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Message inbox</h1>
+      <div class="key-row">
+        <input id="key" type="password" placeholder="Admin API key (server/.env → ADMIN_API_KEY)" autocomplete="off" />
+        <button id="load">Load messages</button>
+      </div>
+      <div class="toolbar">
+        <label for="status">Status</label>
+        <select id="status">
+          <option value="">All</option>
+          <option value="unread">Unread</option>
+          <option value="read">Read</option>
+          <option value="archived">Archived</option>
+        </select>
+        <span id="total"></span>
+      </div>
+    </header>
+    <p id="msg" role="status"></p>
+    <main id="list"></main>
+
+    <script>
+      const keyEl = document.getElementById('key');
+      const loadBtn = document.getElementById('load');
+      const statusSel = document.getElementById('status');
+      const totalEl = document.getElementById('total');
+      const listEl = document.getElementById('list');
+      const msgEl = document.getElementById('msg');
+
+      const esc = v =>
+        String(v ?? '').replace(/[&<>"']/g, c =>
+          ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+        );
+
+      const auth = () => ({ 'X-Admin-Key': keyEl.value.trim() });
+
+      async function load() {
+        if (!keyEl.value.trim()) {
+          msgEl.textContent = 'Enter the admin key first (set ADMIN_API_KEY in server/.env).';
+          return;
+        }
+        msgEl.textContent = 'Loading…';
+        listEl.innerHTML = '';
+        try {
+          const query = new URLSearchParams({ limit: '100' });
+          if (statusSel.value) query.set('status', statusSel.value);
+          const res = await fetch('/api/messages?' + query, { headers: auth() });
+          const data = await res.json().catch(() => ({}));
+          if (res.status === 401 || res.status === 403) {
+            msgEl.textContent = (data.error && data.error.message) || 'Wrong admin key.';
+            return;
+          }
+          if (!res.ok) throw new Error((data.error && data.error.message) || 'Request failed.');
+          render(data);
+          msgEl.textContent = '';
+        } catch (err) {
+          msgEl.textContent = err.message;
+        }
+      }
+
+      function render({ messages = [], total = 0 }) {
+        totalEl.textContent = messages.length + ' shown · ' + total + ' total';
+        if (!messages.length) {
+          listEl.innerHTML = '<p class="empty">No messages here.</p>';
+          return;
+        }
+        listEl.innerHTML = messages
+          .map(m => `
+            <article class="card">
+              <h2>
+                ${esc(m.name)}
+                <span class="badge ${esc(m.status)}">${esc(m.status)}</span>
+                ${m.plan ? `<span class="badge plan">${esc(m.plan)} plan</span>` : ''}
+              </h2>
+              <p class="meta">${esc(m.email)} · ${esc(new Date(m.createdAt).toLocaleString())}${m.subject ? ' · ' + esc(m.subject) : ''}</p>
+              <p class="body-text">${esc(m.message)}</p>
+              <div class="actions">
+                ${m.status !== 'read' ? `<button data-act="read" data-id="${m.id}">Mark read</button>` : ''}
+                ${m.status !== 'unread' ? `<button data-act="unread" data-id="${m.id}">Mark unread</button>` : ''}
+                ${m.status !== 'archived' ? `<button data-act="archived" data-id="${m.id}">Archive</button>` : ''}
+                <button class="warn" data-act="delete" data-id="${m.id}">Delete</button>
+              </div>
+            </article>`)
+          .join('');
+      }
+
+      listEl.addEventListener('click', async e => {
+        const btn = e.target.closest('button[data-act]');
+        if (!btn) return;
+        const id = Number(btn.dataset.id);
+        const act = btn.dataset.act;
+        try {
+          const opts = { method: 'DELETE', headers: auth() };
+          if (act !== 'delete') {
+            opts.method = 'PATCH';
+            opts.headers['Content-Type'] = 'application/json';
+            opts.body = JSON.stringify({ status: act });
+          }
+          const res = await fetch('/api/messages/' + id, opts);
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error((data.error && data.error.message) || 'Action failed.');
+          await load();
+        } catch (err) {
+          msgEl.textContent = err.message;
+        }
+      });
+
+      loadBtn.addEventListener('click', load);
+      statusSel.addEventListener('change', load);
+      keyEl.addEventListener('keydown', e => { if (e.key === 'Enter') load(); });
+      keyEl.focus();
+
+      // Convenience: prefill the key from ?key=… when you trust the URL.
+      const fromUrl = new URLSearchParams(location.search).get('key');
+      if (fromUrl) { keyEl.value = fromUrl; load(); }
+    </script>
+  </body>
+</html>

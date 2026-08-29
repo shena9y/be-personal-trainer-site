@@ -1,0 +1,32 @@
+{
+  "name": "be-personal-trainer-backend",
+  "version": "1.0.0",
+  "description": "Backend for the Be Personal Trainer site — serves the static frontend, powers the contact form, plans and stats, and provides an admin API.",
+  "private": true,
+  "type": "module",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test",
+    "smoke": "node scripts/smoke.js",
+    "seed": "node src/seed.js"
+  },
+  "keywords": [
+    "express",
+    "sqlite",
+    "personal-trainer",
+    "contact-form"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.7.0",
+    "helmet": "^8.3.0",
+    "nodemailer": "^6.10.0"
+  }
+}

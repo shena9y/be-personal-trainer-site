@@ -59,6 +59,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
     <header class="nav" id="nav">
       <a class="logo" href="#start" aria-label="Be Personal Trainer home">
         <span class="logo-mark" aria-hidden="true">
@@ -81,6 +82,8 @@
       </button>
 
       <nav class="menu" id="menu">
+        <a href="/login.html" data-auth="login">Sign in</a>
+        <a href="/signup.html" data-auth="signup">Sign up</a>
         <a href="#start">Start</a>
         <a href="#training">Training</a>
         <a href="#about">About me</a>
@@ -105,7 +108,10 @@
       <div class="hero-inner">
         <div class="hero-copy">
           <h1>Personal training with<br /><span>Brandon Ross</span></h1>
-          <p>Build strength, stamina and habits that actually last.</p>
+          <p>
+            Build <span class="typed" id="typed">strength</span
+            ><span class="caret" aria-hidden="true"></span> that actually lasts.
+          </p>
           <a class="btn btn-primary read-more" href="#about">Read more</a>
         </div>
       </div>
@@ -128,6 +134,13 @@
               class="w1"
               d="M0 62 C40 62 55 20 95 22 C135 24 145 55 185 40 C225 25 260 48 300 44"
             />
+            <circle class="run-dot" r="4" fill="#ff5a1f">
+              <animateMotion
+                dur="5s"
+                repeatCount="indefinite"
+                path="M0 62 C40 62 55 20 95 22 C135 24 145 55 185 40 C225 25 260 48 300 44"
+              />
+            </circle>
             <path
               class="w2"
               d="M0 52 C40 52 60 74 100 74 C140 74 150 40 190 52 C230 64 265 60 300 60"
@@ -154,6 +167,35 @@
             <span>Progress</span><span class="pill">+20%</span>
           </div>
         </article>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <section class="sec stats" aria-label="Coaching numbers">
+      <div class="wrap stats-grid">
+        <div class="stat">
+          <b class="stat-num" data-slug="years-coaching" data-target="12" data-suffix="+">0</b>
+          <p>Years coaching</p>
+        </div>
+        <div class="stat">
+          <b class="stat-num" data-slug="athletes-coached" data-target="500" data-suffix="+">0</b>
+          <p>Athletes coached</p>
+        </div>
+        <div class="stat">
+          <b class="stat-num" data-slug="sessions-delivered" data-target="15000" data-suffix="+">0</b>
+          <p>Sessions delivered</p>
+        </div>
+        <div class="stat">
+          <b
+            class="stat-num"
+            data-slug="client-rating"
+            data-target="4.9"
+            data-decimals="1"
+            data-suffix="★"
+            >0</b
+          >
+          <p>Average client rating</p>
+        </div>
       </div>
     </section>
 
@@ -337,6 +379,25 @@
         <p class="eyebrow center">Pricing</p>
         <h2 class="display center">My services</h2>
 
+        <div class="billing" role="group" aria-label="Choose billing period">
+          <button
+            class="bill-btn active"
+            type="button"
+            data-bill="monthly"
+            aria-pressed="true"
+          >
+            Monthly
+          </button>
+          <button
+            class="bill-btn"
+            type="button"
+            data-bill="yearly"
+            aria-pressed="false"
+          >
+            Yearly · save 20%
+          </button>
+        </div>
+
         <div class="plans">
           <article class="plan">
             <h3>Basic</h3>
@@ -346,8 +407,11 @@
               <li class="no">Weekly video review</li>
               <li class="no">1:1 sessions</li>
             </ul>
-            <div class="price">$39</div>
-            <a class="plan-cta" href="#contact">Buy now</a>
+            <div class="price" data-monthly="39" data-yearly="31">
+              <b class="price-num">$39</b
+              ><small class="price-note">/month</small>
+            </div>
+            <a class="plan-cta" href="#contact" data-plan="Basic">Buy now</a>
           </article>
           <article class="plan is-orange">
             <h3>Professional</h3>
@@ -357,8 +421,11 @@
               <li class="yes">Weekly video review</li>
               <li class="no">1:1 sessions</li>
             </ul>
-            <div class="price">$59</div>
-            <a class="plan-cta" href="#contact">Buy now</a>
+            <div class="price" data-monthly="59" data-yearly="47">
+              <b class="price-num">$59</b
+              ><small class="price-note">/month</small>
+            </div>
+            <a class="plan-cta" href="#contact" data-plan="Professional">Buy now</a>
           </article>
           <article class="plan is-purple">
             <h3>Advanced</h3>
@@ -368,8 +435,11 @@
               <li class="yes">Weekly video review</li>
               <li class="yes">4 × 1:1 sessions</li>
             </ul>
-            <div class="price">$89</div>
-            <a class="plan-cta" href="#contact">Buy now</a>
+            <div class="price" data-monthly="89" data-yearly="71">
+              <b class="price-num">$89</b
+              ><small class="price-note">/month</small>
+            </div>
+            <a class="plan-cta" href="#contact" data-plan="Advanced">Buy now</a>
           </article>
         </div>
       </div>
@@ -491,6 +561,18 @@
             ></textarea
             ><span class="err" aria-live="polite"></span>
           </label>
+          <label class="field hp-field" aria-hidden="true">
+            <span class="sr-only">Leave this field empty</span>
+            <input
+              id="cf-website"
+              name="website"
+              type="text"
+              tabindex="-1"
+              autocomplete="off"
+              data-honeypot
+            />
+          </label>
+          <input type="hidden" name="plan" id="cf-plan" />
           <button class="btn btn-primary center-btn" type="submit">
             Send a message
           </button>
@@ -507,6 +589,22 @@
         >
       </p>
     </section>
+
+    <button class="to-top" id="toTop" aria-label="Back to top" hidden>
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M12 19V5M5 12l7-7 7 7" />
+      </svg>
+    </button>
 
     <div
       class="modal"

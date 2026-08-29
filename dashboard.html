@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Dashboard — Be Personal Trainer</title>
+    <link rel="icon" href="icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Share+Tech+Mono&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --orange: #ff5a1f;
+        --orange-deep: #c2410c;
+        --dark: #101018;
+        --ink-2: #1c1c26;
+        --muted: #9aa0aa;
+        --line: rgba(255, 255, 255, 0.1);
+        --ok: #34d399;
+        --warn: #fbbf24;
+        --bad: #f87171;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: radial-gradient(1200px 600px at 80% -10%, #23232f 0%, var(--dark) 55%);
+        color: #fff;
+        font: 16px/1.6 Roboto, system-ui, sans-serif;
+      }
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 24px;
+        background: rgba(16, 16, 24, 0.85);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--line);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: Oswald, Impact, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        text-transform: lowercase;
+        color: #fff;
+        text-decoration: none;
+      }
+      .top-right { display: flex; align-items: center; gap: 12px; }
+      .userchip {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .userchip b { color: #fff; }
+      .userchip .role {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 2px 9px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--orange);
+      }
+      .btn-out {
+        font: inherit;
+        font-size: 14px;
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+      }
+      .btn-out:hover { border-color: var(--orange); color: var(--orange); }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 28px 20px 60px; }
+      .card {
+        background: var(--ink-2);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin-bottom: 22px;
+      }
+      h1, h2, h3 {
+        font-family: Oswald, Impact, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      h1 { font-size: 26px; margin: 0 0 4px; }
+      h2 { font-size: 19px; margin: 0; }
+      .meta { color: var(--muted); margin: 0; font-size: 14px; }
+      .mono { font-family: "Share Tech Mono", monospace; }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 22px;
+      }
+      .stat {
+        background: var(--ink-2);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 20px;
+      }
+      .stat .num {
+        font-family: Oswald, sans-serif;
+        font-size: 34px;
+        font-weight: 700;
+        line-height: 1.1;
+      }
+      .stat .num.warn { color: var(--warn); }
+      .stat .lbl {
+        color: var(--muted);
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .sec-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .sec-head h2 { margin-right: auto; }
+      .tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+      .tab {
+        font: inherit;
+        font-size: 13px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .tab.active { background: var(--orange-deep); border-color: var(--orange-deep); color: #fff; }
+      .ghost {
+        font: inherit;
+        font-size: 13px;
+        padding: 6px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+      }
+      .ghost:hover { color: #fff; border-color: #fff; }
+      .msg-list { display: grid; gap: 10px; }
+      .msg {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 14px 16px;
+        background: var(--dark);
+      }
+      .msg.unread { border-left: 3px solid var(--orange); }
+      .msg-top {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 10px;
+        font-size: 14px;
+      }
+      .msg-top strong { font-size: 15px; }
+      .msg-top a { color: var(--muted); }
+      .msg time { margin-left: auto; color: var(--muted); font-size: 12px; }
+      .pill {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        padding: 2px 9px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        color: var(--muted);
+      }
+      .pill.plan { color: var(--orange); border-color: rgba(255, 90, 31, 0.4); }
+      .pill.st-unread { color: var(--warn); border-color: rgba(251, 191, 36, 0.4); }
+      .pill.st-read { color: var(--ok); border-color: rgba(52, 211, 153, 0.4); }
+      .msg-subj { margin: 6px 0 2px; font-weight: 500; }
+      .msg-body { color: #d6d9de; font-size: 14px; white-space: pre-wrap; }
+      .msg-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-top: 10px;
+      }
+      .mini {
+        font: inherit;
+        font-size: 12px;
+        padding: 5px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+      }
+      .mini:hover { border-color: var(--orange); color: var(--orange); }
+      .mini.danger:hover { border-color: var(--bad); color: var(--bad); }
+      .empty { color: var(--muted); font-size: 14px; padding: 8px 2px; }
+      .table-wrap { overflow-x: auto; }
+      table { width: 100%; border-collapse: collapse; font-size: 14px; }
+      th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+      th {
+        font-family: "Share Tech Mono", monospace;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: var(--muted);
+      }
+      td .role-admin, td.role-admin { color: var(--orange); }
+      .plans {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+      }
+      .plan {
+        background: var(--dark);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 18px 20px;
+      }
+      .plan.accent-orange { border-color: rgba(255, 90, 31, 0.55); }
+      .plan.accent-purple { border-color: rgba(168, 85, 247, 0.55); }
+      .plan h3 { margin: 0; font-size: 20px; }
+      .plan .price {
+        font-family: Oswald, sans-serif;
+        font-size: 26px;
+        color: var(--orange);
+        margin: 4px 0;
+      }
+      .plan ul { margin: 10px 0 0; padding-left: 18px; color: #d6d9de; font-size: 14px; }
+      .note { color: var(--muted); font-size: 14px; }
+      .note a { color: var(--orange); }
+      @media (max-width: 800px) {
+        .stats { grid-template-columns: repeat(2, 1fr); }
+        .plans { grid-template-columns: 1fr; }
+        .userchip .uname { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="logo" href="/" aria-label="Be Personal Trainer home">
+        <svg viewBox="0 0 40 20" width="40" height="20" aria-hidden="true">
+          <path fill="#ff5a1f" d="M4 4h5v12H4zM31 4h5v12h-5zM9 8h22v4H9z" />
+        </svg>
+        <span
+          >be personal<small
+            style="display: block; font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted)"
+            >trainer</small
+          ></span
+        >
+      </a>
+      <div class="top-right">
+        <span class="userchip" id="userChip" hidden></span>
+        <button class="btn-out" id="logoutBtn" type="button">Sign out</button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="card">
+        <h1 id="greetTitle">Loading…</h1>
+        <p class="meta" id="greetMeta">Checking your session…</p>
+      </section>
+
+      <!-- Admin-only panel -->
+      <section id="adminPanel" hidden>
+        <div class="stats" id="statsGrid"></div>
+
+        <section class="card">
+          <div class="sec-head">
+            <h2>Inbox</h2>
+            <div class="tabs" id="msgTabs" aria-label="Filter messages by status">
+              <button class="tab active" data-status="" type="button">All</button>
+              <button class="tab" data-status="unread" type="button">Unread</button>
+              <button class="tab" data-status="read" type="button">Read</button>
+              <button class="tab" data-status="archived" type="button">Archived</button>
+            </div>
+            <button class="ghost" id="refreshBtn" type="button">↻ Refresh</button>
+          </div>
+          <div class="msg-list" id="msgList">
+            <p class="empty">Loading messages…</p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="sec-head">
+            <h2>Members</h2>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>E-mail</th><th>Role</th><th>Joined</th></tr>
+              </thead>
+              <tbody id="usersBody">
+                <tr><td colspan="4" class="empty">Loading members…</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!-- Regular-member panel -->
+      <section id="userPanel" hidden>
+        <section class="card">
+          <div class="sec-head">
+            <h2>Coaching plans</h2>
+          </div>
+          <div class="plans" id="plansGrid">
+            <p class="empty">Loading plans…</p>
+          </div>
+          <p class="note" style="margin-top: 14px">
+            Want to join or switch plans?
+            <a href="/#contact">Message the coach</a> and he will take it from there.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const esc = (v) =>
+        String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+      const fmtDate = (iso) => {
+        const d = new Date(iso);
+        return isNaN(d) ? "" : d.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+      };
+
+      let me = null;
+      let msgStatus = "";
+
+      /** fetch() wrapper: bounces to the login page on 401, unwraps JSON errors. */
+      const jfetch = async (url, options = {}) => {
+        const res = await fetch(url, options);
+        if (res.status === 401) {
+          window.location.replace("/login.html");
+          throw new Error("unauthorized");
+        }
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error((data.error && data.error.message) || "Request failed.");
+        return data;
+      };
+
+      async function loadSummary() {
+        const s = await jfetch("/api/dashboard/summary");
+        $("statsGrid").innerHTML = [
+          ["Members", s.users, ""],
+          ["Messages", s.messagesTotal, ""],
+          ["Unread", s.messagesUnread, s.messagesUnread > 0 ? "warn" : ""],
+          ["Live plans", s.plans, ""],
+        ]
+          .map(
+            ([lbl, num, cls]) =>
+              `<div class="stat"><div class="num ${cls}">${num}</div><div class="lbl">${lbl}</div></div>`
+          )
+          .join("");
+      }
+
+      async function loadMessages() {
+        const q = msgStatus ? "?status=" + encodeURIComponent(msgStatus) : "";
+        const { messages } = await jfetch("/api/messages" + q);
+        const list = $("msgList");
+        if (!messages.length) {
+          list.innerHTML = `<p class="empty">No ${esc(msgStatus ? msgStatus + " " : "")}messages yet — new contact-form submissions land here.</p>`;
+          return;
+        }
+        list.innerHTML = messages
+          .map(
+            (m) => `
+            <article class="msg ${esc(m.status)}">
+              <div class="msg-top">
+                <strong>${esc(m.name)}</strong>
+                <a href="mailto:${esc(m.email)}">${esc(m.email)}</a>
+                ${m.plan ? `<span class="pill plan">${esc(m.plan)} plan</span>` : ""}
+                <span class="pill st-${esc(m.status)}">${esc(m.status)}</span>
+                <time datetime="${esc(m.createdAt)}">${esc(fmtDate(m.createdAt))}</time>
+              </div>
+              <div class="msg-subj">${m.subject ? esc(m.subject) : "<em>(no subject)</em>"}</div>
+              <div class="msg-body">${esc(m.message)}</div>
+              <div class="msg-actions">
+                <button class="mini" type="button" data-act="toggle" data-id="${m.id}"
+                  data-next="${m.status === "unread" ? "read" : "unread"}">
+                  ${m.status === "unread" ? "Mark read" : "Mark unread"}
+                </button>
+                <button class="mini" type="button" data-act="archive" data-id="${m.id}"
+                  data-next="${m.status === "archived" ? "unread" : "archived"}">
+                  ${m.status === "archived" ? "Unarchive" : "Archive"}
+                </button>
+                <button class="mini danger" type="button" data-act="delete" data-id="${m.id}">Delete</button>
+              </div>
+            </article>`
+          )
+          .join("");
+      }
+      async function loadUsers() {
+        const { users } = await jfetch("/api/dashboard/users");
+        $("usersBody").innerHTML = users
+          .map(
+            (u) => `<tr>
+              <td>${esc(u.name)}</td>
+              <td><a href="mailto:${esc(u.email)}">${esc(u.email)}</a></td>
+              <td class="${u.role === "admin" ? "role-admin mono" : ""}">${esc(u.role)}</td>
+              <td>${esc(fmtDate(u.createdAt))}</td>
+            </tr>`
+          )
+          .join("");
+      }
+
+      async function loadPlans() {
+        const { plans } = await jfetch("/api/plans");
+        $("plansGrid").innerHTML = plans
+          .map(
+            (p) => `<article class="plan ${p.accent ? "accent-" + esc(p.accent) : ""}">
+              <h3>${esc(p.name)}</h3>
+              <div class="price">$${p.priceMonthly}/mo</div>
+              <div class="note">or $${p.priceYearly}/mo billed yearly</div>
+              <ul>
+                ${p.features.map((f) => `<li>${f.included ? "✓" : "✗"} ${esc(f.text)}</li>`).join("")}
+              </ul>
+            </article>`
+          )
+          .join("");
+      }
+
+      $("msgList").addEventListener("click", async (e) => {
+        const btn = e.target.closest("button[data-act]");
+        if (!btn) return;
+        const { act, id } = btn.dataset;
+        try {
+          if (act === "delete") {
+            if (!confirm("Delete this message permanently?")) return;
+            await jfetch("/api/messages/" + id, { method: "DELETE" });
+          } else {
+            await jfetch("/api/messages/" + id, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ status: btn.dataset.next }),
+            });
+          }
+          await Promise.all([loadMessages(), loadSummary()]);
+        } catch (err) {
+          if (err.message !== "unauthorized") alert(err.message);
+        }
+      });
+
+      $("msgTabs").addEventListener("click", (e) => {
+        const tab = e.target.closest(".tab");
+        if (!tab) return;
+        msgStatus = tab.dataset.status;
+        $("msgTabs").querySelectorAll(".tab").forEach((t) => t.classList.toggle("active", t === tab));
+        loadMessages();
+      });
+
+      $("refreshBtn").addEventListener("click", () =>
+        Promise.all([loadSummary(), loadMessages(), loadUsers()])
+      );
+
+      $("logoutBtn").addEventListener("click", async () => {
+        try {
+          await fetch("/api/auth/logout", { method: "POST" });
+        } catch {
+          /* logging out locally anyway */
+        }
+        window.location.href = "/login.html";
+      });
+
+      (async function boot() {
+        try {
+          me = (await jfetch("/api/auth/me")).user;
+        } catch {
+          return; // jfetch already bounced us to the login page
+        }
+        const first = (me.name || "").trim().split(/\s+/)[0] || "there";
+        $("greetTitle").textContent = `Welcome back, ${first}!`;
+        $("greetMeta").textContent = `${me.email} · ${me.role} · member since ${fmtDate(me.createdAt)}`;
+        $("userChip").hidden = false;
+        $("userChip").innerHTML =
+          `<span class="uname">Signed in as <b>${esc(me.name)}</b></span>` +
+          `<span class="role">${esc(me.role)}</span>`;
+        if (me.role === "admin") {
+          $("adminPanel").hidden = false;
+          await Promise.all([loadSummary(), loadMessages(), loadUsers()]);
+        } else {
+          $("userPanel").hidden = false;
+          await loadPlans();
+        }
+      })();
+    </script>
+  </body>
+</html>

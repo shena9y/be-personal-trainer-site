@@ -671,9 +671,6 @@ h3 {
   list-style: none;
   padding: 0;
   margin: 0 0 34px;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 34px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -856,6 +853,23 @@ h3 {
   font-weight: 500;
   min-height: 24px;
 }
+.form-status.is-error {
+  color: #b42318;
+}
+.form-status.is-info {
+  color: #5b6068;
+}
+
+/* Honeypot spam trap — hidden from humans, but still a real input for bots */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
 .copyright {
   text-align: center;
   color: #5b6068;
@@ -885,6 +899,16 @@ h3 {
   width: 100%;
   height: 100%;
   border: 0;
+}
+.modal-box .modal-note {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: #d7dae0;
+  font-size: clamp(16px, 2.4vw, 20px);
+  text-align: center;
+  padding: 0 24px;
 }
 .modal-close {
   position: absolute;
@@ -1016,4 +1040,235 @@ h3 {
   .ring-fg {
     transition: none;
   }
+}
+
+/* ---------- dynamic extras ---------- */
+
+/* scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 70;
+  background: linear-gradient(90deg, var(--orange), #ff8a52);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+}
+
+/* typewriter hero word */
+.typed {
+  color: var(--orange);
+  font-weight: 500;
+}
+.caret {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  margin-left: 3px;
+  vertical-align: -0.12em;
+  background: var(--orange);
+  animation: caret-blink 0.85s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* hero parallax */
+.hero-media img {
+  will-change: transform;
+}
+
+/* wave draw-in + running progress dot */
+.wave path {
+  transition: stroke-dashoffset 1.6s ease 0.3s;
+}
+.run-dot {
+  opacity: 0;
+  transition: opacity 0.4s;
+  filter: drop-shadow(0 0 6px rgba(255, 90, 31, 0.9));
+}
+.wave.live .run-dot {
+  opacity: 1;
+}
+
+/* stats band */
+.stats {
+  padding: 0;
+  background: #0b0b12;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat {
+  padding: 46px 24px;
+  text-align: center;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+.stat:last-child {
+  border-right: 0;
+}
+.stat b {
+  display: block;
+  font-family: Oswald, sans-serif;
+  font-size: clamp(34px, 4vw, 58px);
+  line-height: 1;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+.stat p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-family: "Share Tech Mono", monospace;
+  text-transform: uppercase;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+/* billing toggle */
+.billing {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: -24px 0 48px;
+}
+.bill-btn {
+  font-family: "Share Tech Mono", monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 13px;
+  padding: 10px 20px;
+  background: transparent;
+  color: #d7dae0;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+}
+.bill-btn:hover {
+  border-color: var(--orange);
+  color: #fff;
+}
+.bill-btn.active {
+  background: var(--orange-deep);
+  border-color: var(--orange-deep);
+  color: #fff;
+}
+.price-num,
+.price-note {
+  display: block;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.price-note {
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+  opacity: 0.85;
+}
+.plans.is-switching .price-num,
+.plans.is-switching .price-note {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+.plans {
+  perspective: 900px;
+}
+
+/* 3d tilt on plans (hover-capable screens only) */
+@media (hover: hover) and (pointer: fine) {
+  .plan.plan-tilt {
+    transition:
+      transform 0.16s ease-out,
+      opacity 0.7s ease;
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+}
+
+/* back-to-top */
+.to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--orange-deep);
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+}
+.to-top[hidden] {
+  display: none;
+}
+.to-top.show {
+  opacity: 1;
+  transform: none;
+}
+.to-top:hover {
+  background: var(--orange);
+}
+
+/* responsive extras */
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .stat:nth-child(2) {
+    border-right: 0;
+  }
+  .stat {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+@media (max-width: 640px) {
+  .billing {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* reduced motion for the new pieces */
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .run-dot {
+    display: none;
+  }
+  .wave path,
+  .price-num,
+  .price-note,
+  .to-top {
+    transition: none;
+  }
+}
+
+/* ---- Nav auth links (Sign in / Sign up — swapped for Dashboard when signed in) ---- */
+/* .menu a[data-auth='signup'] {
+  color: #ff5a1f;
+} */
+.menu a[data-auth="dashboard"] {
+  color: #ff5a1f;
+  font-weight: 700;
 }
