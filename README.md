@@ -266,3 +266,9 @@ honeypot + rate limiting, the admin messages API, and the auth flow
 
 - Built by [Mohammed Hamdy](https://github.com/shena9y)
 - Photography via Unsplash
+- [live site](https://shena9y.github.io/be-personal-trainer-site/)
+
+
+| Admin | Sign In | DashBoard |
+| :---: | :---: | :---: |
+| <img src="adminPage.png" width="350"> | <img src="signIn,signUpPage.png" width="350"> | <img src="userDashboard.png" width="350"> |
