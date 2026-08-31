@@ -1,6 +1,6 @@
 # be-personal-trainer-site
 
-> Personal-training website for Brandon Ross — "Be Personal Trainer". Strength, conditioning and nutrition coaching in Melbourne or online. Vanilla HTML/CSS/JS landing page with PWA support — no build step for the frontend, plus a **Node.js + Express + SQLite backend** that powers the contact form, serves the plans/stats APIs, and provides an admin inbox.
+> Personal-training website for John Doe — "Be Personal Trainer". Strength, conditioning and nutrition coaching in Melbourne or online. Vanilla HTML/CSS/JS landing page with PWA support — no build step for the frontend, plus a **Node.js + Express + SQLite backend** that powers the contact form, serves the plans/stats APIs, and provides an admin inbox.
 
 ---
 
@@ -14,7 +14,7 @@ Personal-training site for Be Personal Trainer — strength, conditioning & nutr
 
 ## Overview
 
-A single-page marketing site for **Be Personal Trainer**, the personal-training business of Brandon Ross, based in Melbourne (Level 13, 2 Elizabeth St).
+A single-page marketing site for **Be Personal Trainer**, the personal-training business of John Doe, based in Melbourne (Level 13, 2 Elizabeth St).
 
 The page covers:
 
