@@ -6,8 +6,8 @@ const { app, db, config } = createApp();
 // `SERVER_ROOT` would be nicer to print, but this is kept simple.
 const server = app.listen(config.port, config.host, () => {
   const { port } = server.address();
-  const admin = config.adminApiKey === 'change-me-before-deploying'
-    ? 'change-me-before-deploying (DEFAULT — set ADMIN_API_KEY!)'
+  const admin = config.adminApiKey === '805321854174480704939529606805'
+    ? '805321854174480704939529606805 (DEFAULT — set ADMIN_API_KEY!)'
     : 'configured, set via ADMIN_API_KEY';
 
   console.log('Be Personal Trainer backend');
