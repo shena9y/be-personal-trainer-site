@@ -27,6 +27,7 @@ export function createConfig(env = process.env) {
     nodeEnv: env.NODE_ENV || 'development',
     port: toInt(env.PORT, 3000),
     host: env.HOST || '127.0.0.1',
+    host: env.HOST || "0.0.0.0",
     databasePath,
     adminApiKey: env.ADMIN_API_KEY || 'change-me-before-deploying',
 
