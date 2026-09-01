@@ -29,7 +29,7 @@ export function createConfig(env = process.env) {
     host: env.HOST || '127.0.0.1',
     host: env.HOST || "0.0.0.0",
     databasePath,
-    adminApiKey: env.ADMIN_API_KEY || 'change-me-before-deploying',
+    adminApiKey: env.ADMIN_API_KEY || '805321854174480704939529606805',
 
     // Admin account bootstrap (created when the users table is empty)
     adminEmail: (env.ADMIN_EMAIL || '').trim().toLowerCase(),
