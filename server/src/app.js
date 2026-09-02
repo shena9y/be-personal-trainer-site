@@ -99,9 +99,12 @@ export function createApp(options = {}) {
       if (session) queries.deleteSession(token);
       // Browsing humans get bounced to the sign-in page (remembering where
       // they were headed so login can send them back); API clients get JSON.
+      const wantsJson = (req.headers.accept || '').includes('application/json');
+      if (wantsJson) {
+        return res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'Please sign in to continue.' } });
+      }
       const loginTarget = encodeURIComponent(req.originalUrl || '/dashboard.html');
       return res.redirect(`/login.html?next=${loginTarget}`);
-      res.status(401).json({ error: { code: 'UNAUTHORIZED', message: 'Please sign in to continue.' } });
     };
     app.get('/dashboard', dashboardGuard, (req, res) => res.sendFile(dashboardPage));
     app.get('/dashboard.html', dashboardGuard, (req, res) => res.sendFile(dashboardPage));
