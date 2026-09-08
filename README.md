@@ -1,6 +1,6 @@
 # be-personal-trainer-site
 
-> Personal-training website for John Doe — "Be Personal Trainer". Strength, conditioning and nutrition coaching in Melbourne or online. Vanilla HTML/CSS/JS landing page with PWA support — no build step for the frontend, plus a **Node.js + Express + SQLite backend** that powers the contact form, serves the plans/stats APIs, and provides an admin inbox.
+> Personal-training website — "Be Personal Trainer". Strength, conditioning and nutrition coaching in Melbourne or online. Vanilla HTML/CSS/JS landing page with PWA support — no build step for the frontend, plus a **Node.js + Express + SQLite backend** that powers the contact form, serves the plans/stats APIs, and provides an admin inbox.
 
 ---
 
